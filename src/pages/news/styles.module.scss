@@ -1,0 +1,73 @@
+@import '/src/css/breakpoints.scss';
+@import '/src/css/colors.scss';
+@import '/src/css/common/form.scss';
+
+.news__add-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.news__button {
+  &:not(:last-child) {
+    margin-right: 30px;
+  }
+}
+
+.news__button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.news__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.news__date {
+  font-size: 16px;
+  padding-bottom: 10px;
+  color: $primary;
+}
+
+.news__form {
+  width: 400px;
+}
+
+.news__header {
+  font-size: 28px;
+  font-weight: 600;
+  padding-bottom: 25px;
+}
+
+.news__item {
+  width: 100%;
+  padding: 20px;
+}
+
+.news__search {
+  margin: auto;
+  max-width: 500px;
+}
+
+.news__text {
+  display: block;
+  white-space: pre-line;
+}
+
+@media screen and (min-width: $small) {
+  .news__content {
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 100%;
+    width: 100%;
+    max-width: $big;
+  }
+
+  .news__item {
+    width: 50%;
+  }
+}

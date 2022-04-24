@@ -1,0 +1,16 @@
+@import './reset.scss';
+@import './fonts.scss';
+@import './colors.scss';
+
+body {
+  font-family: Alegreya, sans-serif;
+  font-size: 18px;
+  color: $text;
+  background-color: $background;
+  box-sizing: border-box;
+}
+
+a {
+  color: $text;
+  text-decoration: none;
+}

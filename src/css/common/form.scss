@@ -1,0 +1,24 @@
+@import '/src/css/colors.scss';
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form__error {
+  margin-top: 10px;
+  height: 30px;
+  color: $red;
+}
+
+.form__field-container {
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+}
+
+.form__submit-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+}
