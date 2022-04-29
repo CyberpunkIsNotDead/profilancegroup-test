@@ -2,6 +2,10 @@
 @import '/src/css/colors.scss';
 @import '/src/css/common/form.scss';
 
+.news {
+  width: 100%;
+}
+
 .news__add-button-container {
   display: flex;
   justify-content: center;

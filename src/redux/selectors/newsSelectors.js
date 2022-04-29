@@ -4,16 +4,10 @@ import { selectUser } from './authSelectors';
 
 export const selectNews = state => state.news.records;
 
-export const selectFiltered = createSelector(selectNews, selectUser, (news, user) => {
-  const newsArray = Object.values(news);
-
+export const selectFilteredForUser = createSelector(selectNews, selectUser, (news, user) => {
   if (!user) {
-    return newsArray.filter(r => r.isApproved);
+    return news.filter(r => r.isApproved);
   }
 
-  return newsArray;
+  return news;
 });
-
-export const selectSorted = createSelector(selectFiltered, filteredNews =>
-  filteredNews.sort((prev, next) => next.creationDate.localeCompare(prev.creationDate))
-);

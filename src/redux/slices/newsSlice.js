@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { NEWS } from 'src/lib/constants';
 
 const initialState = {
-  records: NEWS.reduce((acc, curr) => ({ ...acc, [curr.creationDate]: curr }), {}),
+  records: NEWS.sort((prev, next) => next.creationDate.localeCompare(prev.creationDate)),
 };
 
 const newsSlice = createSlice({
@@ -15,24 +15,24 @@ const newsSlice = createSlice({
 
       const creationDate = new Date().toISOString();
 
-      state.records[creationDate] = {
+      state.records.unshift({
         creationDate,
         header,
         text,
         isApproved: false,
-      };
+      });
     },
 
     approve: (state, action) => {
-      const creationDate = action.payload;
+      const recordIndex = state.records.findIndex(
+        r => r.creationDate === action.payload.creationDate
+      );
 
-      state.records[creationDate] = { ...state.records[creationDate], isApproved: true };
+      state.records[recordIndex] = { ...state.records[recordIndex], isApproved: true };
     },
 
     remove: (state, action) => {
-      const creationDate = action.payload;
-
-      delete state.records[creationDate];
+      state.records = state.records.filter(r => r.creationDate !== action.payload.creationDate);
     },
   },
 });

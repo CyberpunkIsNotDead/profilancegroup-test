@@ -15,7 +15,7 @@ import { formatDate } from 'src/lib/helper';
 import useModal from 'src/hooks/useModal';
 
 import { selectUser } from 'src/redux/selectors/authSelectors';
-import { selectSorted } from 'src/redux/selectors/newsSelectors';
+import { selectFilteredForUser } from 'src/redux/selectors/newsSelectors';
 import { newsSlice } from 'src/redux/slices/newsSlice';
 
 import styles from './styles.module.scss';
@@ -27,9 +27,9 @@ const NewsItem = ({ record, userRole }) => {
 
   const dispatch = useDispatch();
 
-  const onApproveButtonClick = () => dispatch(approve(creationDate));
+  const onApproveButtonClick = () => dispatch(approve({ creationDate }));
 
-  const onDeleteButtonClick = () => dispatch(remove(creationDate));
+  const onDeleteButtonClick = () => dispatch(remove({ creationDate }));
 
   return (
     <div className={styles['news__item']}>
@@ -55,7 +55,7 @@ const NewsItem = ({ record, userRole }) => {
 const NewsPage = () => {
   const dispatch = useDispatch();
 
-  const news = useSelector(state => selectSorted(state));
+  const news = useSelector(state => selectFilteredForUser(state));
 
   const user = useSelector(state => selectUser(state));
 
@@ -77,9 +77,13 @@ const NewsPage = () => {
   });
 
   const filteredNews = news.filter(r => {
-    const totalString = r.header + r.text;
+    const lowerCaseSubstring = search.toLowerCase();
 
-    return totalString.toLowerCase().includes(search.toLowerCase());
+    const isHeaderMatches = r.header.toLowerCase().includes(lowerCaseSubstring);
+
+    const isTextMatches = r.text.toLowerCase().includes(lowerCaseSubstring);
+
+    return isHeaderMatches || isTextMatches;
   });
 
   const onAddButtonClick = () => toggle(true);
